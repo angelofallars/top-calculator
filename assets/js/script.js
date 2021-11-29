@@ -48,12 +48,15 @@ function appendOperation(event) {
     const lastChar = typedExpression.slice(-1);
     const lastLastChar = typedExpression.slice(-2, -1);
     const operationType = event.target.id;
+    if (!typedExpression)
+        return;
     // Can't stack another operation after another
     if (operationSymbols.includes(lastChar) && operationType !== "subtract")
         return;
-    if (lastChar === "-" && (operationSymbols.includes(lastLastChar)
-        || lastLastChar === "-"
-        || operationType === "subtract"))
+    if ((lastChar === "+" || lastChar === "-") &&
+        (operationSymbols.includes(lastLastChar)
+            || lastLastChar === "-"
+            || operationType === "subtract"))
         return;
     switch (operationType) {
         case "add":
@@ -86,9 +89,11 @@ function calculateExpression() {
     let currentNumber = "";
     let operation = add;
     let result = 0;
-    // If the user didn't type anything, don't do anything
-    if (!typedExpression)
+    // If the user didn't type anything, just clear the screen
+    if (typedExpression === "") {
+        clearDisplay();
         return;
+    }
     // Split the typed expression into an array
     for (let i = 0; i < typedExpression.length + 1; i++) {
         const char = typedExpression[i];
