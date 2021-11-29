@@ -94,6 +94,9 @@ function calculateExpression() {
         clearDisplay();
         return;
     }
+    // Don't allow incomplete expressions (stray operations at end)
+    if (operationSymbols.includes(typedExpression.slice(-1)))
+        return;
     // Split the typed expression into an array
     for (let i = 0; i < typedExpression.length + 1; i++) {
         const char = typedExpression[i];
