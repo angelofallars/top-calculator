@@ -41,6 +41,11 @@ function appendDigit(event) {
     updateDisplay();
 }
 function appendPeriod() {
+    // Prevent overload of periods
+    for (let i = typedExpression.length - 1; (!operationSymbols.includes(typedExpression[i]) && i > -1); i--) {
+        if (typedExpression[i] === ".")
+            return;
+    }
     typedExpression += ".";
     updateDisplay();
 }
