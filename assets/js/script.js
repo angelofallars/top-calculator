@@ -89,9 +89,8 @@ function calculateExpression() {
     let currentNumber = "";
     let operation = add;
     let result = 0;
-    // If the user didn't type anything, just clear the screen
+    // If the user didn't type anything, just return
     if (typedExpression === "") {
-        clearDisplay();
         return;
     }
     // Don't allow incomplete expressions (stray operations at end)

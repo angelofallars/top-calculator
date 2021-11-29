@@ -108,9 +108,8 @@ function calculateExpression() {
   let operation: operation = add;
   let result = 0;
 
-  // If the user didn't type anything, just clear the screen
+  // If the user didn't type anything, just return
   if (typedExpression === "") {
-    clearDisplay();
     return;
   }
 
