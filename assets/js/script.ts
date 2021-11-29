@@ -58,7 +58,15 @@ function appendPeriod() {
 }
 
 function appendOperation(event: any) {
-  switch (event.target.id) {
+  const lastChar = typedExpression.slice(-1);
+  const operationType = event.target.id;
+
+  // Can't stack another operation after another
+  if (operations.includes(lastChar) && operationType !== "subtract") return;
+
+  if (lastChar === "-" && operations.includes(typedExpression.slice(-2))) return;
+  
+  switch (operationType) {
     case "add":
       typedExpression += "+";
       break;
