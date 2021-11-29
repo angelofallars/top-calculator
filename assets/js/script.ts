@@ -266,11 +266,18 @@ displayInput.addEventListener("animationend", (e) => {
 
 // Responsive animations
 buttons.forEach(button => {
-  button.addEventListener("click", (e) => {
+  button.addEventListener("mouseenter", (e) => {
+    const target = e.target as HTMLElement;
+    target.classList.remove("calc__btn--tap");
+  });
+
+  button.addEventListener("mouseup", (e) => {
     const target = e.target as HTMLElement;
     const inMobileMode = window.matchMedia("(max-width: 768px)").matches;
 
     if (inMobileMode) {
+      target.style.animation = "none";
+      setTimeout(() => target.style.animation = "", 10);
       target.classList.add("calc__btn--tap");
     }
   });
