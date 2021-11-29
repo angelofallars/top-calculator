@@ -102,6 +102,12 @@ function calculateExpression() {
       currentNumber += char;
 
     } else if (operations.includes(char) || i === typedExpression.length) {
+      // Edge case: Division by zero
+      if (currentNumber === "0" && operation === divide) {
+        typedExpression = "";
+        return updateDisplay("No zero division!");
+      }
+
       // Calculate an operation right away
       result = operate(operation, [result, parseInt(currentNumber)]); 
       currentNumber = "";

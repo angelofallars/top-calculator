@@ -81,8 +81,17 @@ function calculateExpression() {
         const char = typedExpression[i];
         if (!isNaN(parseInt(char)) || char === ".") {
             currentNumber += char;
+            // Detect negative numbers that start with -
+        }
+        else if (currentNumber === "" && char === "-") {
+            currentNumber += char;
         }
         else if (operations.includes(char) || i === typedExpression.length) {
+            // Edge case: Division by zero
+            if (currentNumber === "0" && operation === divide) {
+                typedExpression = "";
+                return updateDisplay("No zero division!");
+            }
             // Calculate an operation right away
             result = operate(operation, [result, parseInt(currentNumber)]);
             currentNumber = "";
