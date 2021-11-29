@@ -14,7 +14,7 @@ let typedExpression: string = "";
 
 type operation = (a: number, b: number) => number;
 
-// Updating the display
+// Display functions
 
 function updateDisplayInput(updateString?: string) {
   displayInput.classList.remove("calc__display--gray");
@@ -35,6 +35,10 @@ function clearDisplay() {
   typedExpression = "";
   updateDisplayInput();
   updateDisplayResult("");
+}
+
+function shakeDisplayInput() {
+  displayInput.classList.add("calc__display__input--pop");
 }
 
 function shortenNumber(n: number): string {
@@ -74,7 +78,11 @@ function operate(operator: Function, numbers: [number, number]): number {
 // Button click functions
 
 function addToExpression(char: string) {
-  if (typedExpression.length > MAX_INPUT_LEN) return;
+  if (typedExpression.length > MAX_INPUT_LEN) {
+    shakeDisplayInput();
+    return;
+  }
+
   typedExpression += char;
   updateDisplayInput();
 }
@@ -89,7 +97,10 @@ function appendPeriod() {
        (!operationSymbols.includes(typedExpression[i]) && i > -1);
        i--) {
 
-    if (typedExpression[i] === ".") return;
+    if (typedExpression[i] === ".") {
+      shakeDisplayInput();
+      return;
+    }
   }
 
   addToExpression(".");
@@ -100,20 +111,26 @@ function appendOperation(event: any) {
   const lastChar = typedExpression.slice(-1);
   const lastLastChar = typedExpression.slice(-2, -1);
   const operationType = event.target.id;
+  let invalidInput = false;
 
   if (operationType !== "subtract") {
     // Don't put operations when there are no numbers yet
-    if (!typedExpression) return;
+    if (!typedExpression) invalidInput = true;
 
     // Can't stack another operation after another
-    if (operationSymbols.includes(lastChar)) return;
+    if (operationSymbols.includes(lastChar)) invalidInput =true;
   }
 
   // Safety checks around + and - operators
   if ((lastChar === "+" || lastChar === "-") && 
       (operationSymbols.includes(lastLastChar)
        || lastLastChar === "-"
-       || operationType === "subtract")) return;
+       || operationType === "subtract")) invalidInput = true;
+
+  if (invalidInput) {
+    if (typedExpression !== "") shakeDisplayInput();
+    return;
+  }
 
   switch (operationType) {
     case "add":
@@ -150,7 +167,10 @@ function calculateExpression() {
   }
 
   // Don't allow incomplete expressions (stray operations at end)
-  if (operationSymbols.includes(typedExpression.slice(-1))) return
+  if (operationSymbols.includes(typedExpression.slice(-1))) {
+    shakeDisplayInput();
+    return;
+  }
 
   // Split the typed expression into an array
   for (let i = 0; i < typedExpression.length + 1; i++) {
@@ -167,7 +187,8 @@ function calculateExpression() {
       // Edge case: Division by zero
       if (currentNumber === "0" && operation === divide) {
         typedExpression = "";
-        return updateDisplayInput("No zero division!");
+        shakeDisplayInput();
+        updateDisplayInput("No zero division!");
       }
 
       // Calculate an operation right away
@@ -197,7 +218,10 @@ function calculateExpression() {
   }
 
   // If the evaluated result didn't do anything (same as input), return
-  if (String(result) === typedExpression) return;
+  if (String(result) === typedExpression) {
+    shakeDisplayInput();
+    return;
+  }
 
   // Clear the user input
   typedExpression = "";
@@ -222,3 +246,8 @@ periodButton.addEventListener("click", appendPeriod);
 deleteButton.addEventListener("click", deleteLastChar);
 clearButton.addEventListener("click", clearDisplay);
 equalsButton.addEventListener("click", calculateExpression);
+
+displayInput.addEventListener("animationend", (e) => {
+  const target = e.target as HTMLTextAreaElement;
+  target.classList.remove("calc__display__input--pop");
+});

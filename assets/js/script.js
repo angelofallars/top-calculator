@@ -11,7 +11,7 @@ const clearButton = document.querySelector("#clear");
 const equalsButton = document.querySelector("#equals");
 const operationSymbols = ["+", "-", "x", "/", "%"];
 let typedExpression = "";
-// Updating the display
+// Display functions
 function updateDisplayInput(updateString) {
     displayInput.classList.remove("calc__display--gray");
     displayResult.classList.add("calc__display--gray");
@@ -29,6 +29,9 @@ function clearDisplay() {
     typedExpression = "";
     updateDisplayInput();
     updateDisplayResult("");
+}
+function shakeDisplayInput() {
+    displayInput.classList.add("calc__display__input--pop");
 }
 function shortenNumber(n) {
     if (String(n).length < MAX_RESULT_LEN) {
@@ -59,8 +62,10 @@ function operate(operator, numbers) {
 }
 // Button click functions
 function addToExpression(char) {
-    if (typedExpression.length > MAX_INPUT_LEN)
+    if (typedExpression.length > MAX_INPUT_LEN) {
+        shakeDisplayInput();
         return;
+    }
     typedExpression += char;
     updateDisplayInput();
 }
@@ -70,8 +75,10 @@ function appendDigit(event) {
 function appendPeriod() {
     // Prevent overload of periods
     for (let i = typedExpression.length - 1; (!operationSymbols.includes(typedExpression[i]) && i > -1); i--) {
-        if (typedExpression[i] === ".")
+        if (typedExpression[i] === ".") {
+            shakeDisplayInput();
             return;
+        }
     }
     addToExpression(".");
     updateDisplayInput();
@@ -80,20 +87,26 @@ function appendOperation(event) {
     const lastChar = typedExpression.slice(-1);
     const lastLastChar = typedExpression.slice(-2, -1);
     const operationType = event.target.id;
+    let invalidInput = false;
     if (operationType !== "subtract") {
         // Don't put operations when there are no numbers yet
         if (!typedExpression)
-            return;
+            invalidInput = true;
         // Can't stack another operation after another
         if (operationSymbols.includes(lastChar))
-            return;
+            invalidInput = true;
     }
     // Safety checks around + and - operators
     if ((lastChar === "+" || lastChar === "-") &&
         (operationSymbols.includes(lastLastChar)
             || lastLastChar === "-"
             || operationType === "subtract"))
+        invalidInput = true;
+    if (invalidInput) {
+        if (typedExpression !== "")
+            shakeDisplayInput();
         return;
+    }
     switch (operationType) {
         case "add":
             addToExpression("+");
@@ -125,8 +138,10 @@ function calculateExpression() {
         return;
     }
     // Don't allow incomplete expressions (stray operations at end)
-    if (operationSymbols.includes(typedExpression.slice(-1)))
+    if (operationSymbols.includes(typedExpression.slice(-1))) {
+        shakeDisplayInput();
         return;
+    }
     // Split the typed expression into an array
     for (let i = 0; i < typedExpression.length + 1; i++) {
         const char = typedExpression[i];
@@ -141,7 +156,8 @@ function calculateExpression() {
             // Edge case: Division by zero
             if (currentNumber === "0" && operation === divide) {
                 typedExpression = "";
-                return updateDisplayInput("No zero division!");
+                shakeDisplayInput();
+                updateDisplayInput("No zero division!");
             }
             // Calculate an operation right away
             result = operate(operation, [result, Number(currentNumber)]);
@@ -168,8 +184,10 @@ function calculateExpression() {
         }
     }
     // If the evaluated result didn't do anything (same as input), return
-    if (String(result) === typedExpression)
+    if (String(result) === typedExpression) {
+        shakeDisplayInput();
         return;
+    }
     // Clear the user input
     typedExpression = "";
     displayInput.classList.add("calc__display--gray");
@@ -192,3 +210,7 @@ periodButton.addEventListener("click", appendPeriod);
 deleteButton.addEventListener("click", deleteLastChar);
 clearButton.addEventListener("click", clearDisplay);
 equalsButton.addEventListener("click", calculateExpression);
+displayInput.addEventListener("animationend", (e) => {
+    const target = e.target;
+    target.classList.remove("calc__display__input--pop");
+});

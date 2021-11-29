@@ -86,6 +86,23 @@ html, body {
   transition: color 0.20s ease-out;
 }
 
+@keyframes pop {
+  15% {
+    transform: translateY(-4px);
+  }
+  66% {
+    transform: translateY(4px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.calc__display__input--pop {
+  animation-name: pop;
+  animation-duration: 0.25s;
+}
+
 .calc__buttons {
   display: flex;
   flex-direction: column;
