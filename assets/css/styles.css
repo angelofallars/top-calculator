@@ -1,15 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono&family=Roboto:wght@400;700&display=swap');
 
 /* Tomorrow Night by Chris Kempson (http://chriskempson.com) */
 :root {
   --base1:   #1d1f21;
   --base2:   #282a2e;
   --base3:   #373b41;
-  --base5:   #969896;
-  --base6:   #b4b7b4;
-  --base7:   #c5c8c6;
-  --base8:   #e0e0e0;
-  --base9:   #ffffff;
+  --base4:   #969896;
+  --base5:   #b4b7b4;
+  --base6:   #c5c8c6;
+  --base7:   #e0e0e0;
+  --base8:   #ffffff;
   --red:     #cc6666;
   --orange:  #de935f;
   --yellow:  #f0c674;
@@ -18,10 +18,19 @@
   --blue:    #81a2be;
   --magenta: #b294bb;
   --brown:   #a3685a;
+
+  --base3--bright:   #494C52;
+  --base3--brighter: #5B5F66;
+  --blue--dark:      #708DA6;
+  --blue--dark--hov: #7998B2;
+  --red--bright:     #DD6E6E;
+  --red--brighter:   #F27979;
+
+  --btn-border-radius: 7px;
 }
 
 html, body {
-  background-color: var(--base8);
+  background-color: var(--base7);
   color: var(--base1);
   font-family: 'Roboto', sans-serif;
   margin: 0;
@@ -32,10 +41,10 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 50px;
+  margin-top: 25px;
   height: 100%;
   width: 100%;
-  gap: 20px;
+  gap: 18px;
 }
 
 #calc {
@@ -45,18 +54,22 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 20px;
-  border-radius: 16px;
+  gap: 15px;
+  padding: 25px 18px;
+  border-radius: 12px;
   font-size: 1.8em;
 }
 
 .calc__display {
-  background-color: var(--base3);
-  color: var(--base9);
+  background-color: var(--base7);
+  color: var(--base2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   width: 100%;
+  height: 50px;
   text-align: right;
-  border-radius: 5px;
+  border-radius: var(--btn-border-radius);
   box-sizing: border-box;
   padding: 0 10px;
 }
@@ -64,21 +77,67 @@ html, body {
 .calc__buttons {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 9px;
 }
 
 .calc__row {
   display: flex;
-  gap: 10px;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 9px;
 }
 
 .calc__btn {
   background-color: var(--base3);
-  color: var(--base9);
+  color: var(--base8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 0;
-  border-radius: 5px;
-  padding: 10px 10px;
-  font-family: 'Roboto', sans-serif;
+  border-radius: var(--btn-border-radius);
+  font-family: 'Roboto Mono', monospace;
   font-size: 1.0em;
-  width: 50px;
+  width: 60px;
+  flex-basis: 60px;
+  height: 52px;
+}
+
+.calc__btn:hover {
+  background-color: var(--base3--bright);
+}
+
+.calc__btn:active {
+  background-color: var(--base3--brighter);
+}
+
+.calc__btn--blue {
+  background-color: var(--blue--dark);
+}
+
+.calc__btn--blue:hover {
+  background-color: var(--blue--dark--hov);
+}
+
+.calc__btn--blue:active {
+  background-color: var(--blue);
+}
+
+.calc__btn--red {
+  background-color: var(--red);
+}
+
+.calc__btn--red:hover {
+  background-color: var(--red--bright);
+}
+
+.calc__btn--red:hover {
+  background-color: var(--red--brighter);
+}
+
+.calc__btn--width2x {
+  flex: 2;
+}
+
+a {
+  color: var(--base1);
 }

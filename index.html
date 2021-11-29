@@ -8,6 +8,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./assets/css/styles.css">
   <script src="./assets/js/script.js" defer></script>
+  <script src="https://kit.fontawesome.com/86c060d6eb.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <div id="container">
@@ -17,42 +18,44 @@
       <div class="calc__buttons">
 
         <div class="calc__row">
-          <button class="calc__btn calc__btn--del">DEL</button> 
-          <button class="calc__btn calc__btn--ac">AC</button> 
+          <button id="clear" class="calc__btn calc__btn--red">AC</button>
+          <button id="delete" class="calc__btn calc__btn--red"><i class="fas fa-arrow-left"></i></button>
+          <button id="modulo" class="calc__btn">%</button>
+          <button id="divide" class="calc__btn">÷</button> 
         </div>
 
         <div class="calc__row">
-          <button class="calc__btn calc__btn--7">7</button>
-          <button class="calc__btn calc__btn--8">8</button> 
-          <button class="calc__btn calc__btn--9">9</button> 
-          <button class="calc__btn calc__btn--multiply">×</button> 
+          <button id="7" class="calc__btn calc__btn--num">7</button>
+          <button id="8" class="calc__btn calc__btn--num">8</button> 
+          <button id="9" class="calc__btn calc__btn--num">9</button> 
+          <button id="multiply" class="calc__btn">×</button> 
         </div>
 
         <div class="calc__row">
-          <button class="calc__btn calc__btn--4">4</button> 
-          <button class="calc__btn calc__btn--5">5</button> 
-          <button class="calc__btn calc__btn--6">6</button> 
-          <button class="calc__btn calc__btn--divide">÷</button> 
+          <button id="4" class="calc__btn calc__btn--num">4</button> 
+          <button id="5" class="calc__btn calc__btn--num">5</button> 
+          <button id="6" class="calc__btn calc__btn--num">6</button> 
+          <button id=subtract" class="calc__btn">-</button> 
         </div>
 
         <div class="calc__row">
-          <button class="calc__btn calc__btn--1">1</button> 
-          <button class="calc__btn calc__btn--2">2</button> 
-          <button class="calc__btn calc__btn--3">3</button> 
-          <button class="calc__btn calc__btn--subtract">-</button> 
+          <button id="1" class="calc__btn calc__btn--num">1</button> 
+          <button id="2" class="calc__btn calc__btn--num">2</button> 
+          <button id="3" class="calc__btn calc__btn--num">3</button> 
+          <button id="add" class="calc__btn">+</button> 
         </div>
 
         <div class="calc__row">
-          <button class="calc__btn calc__btn--decimal">.</button> 
-          <button class="calc__btn calc__btn--0">0</button> 
-          <button class="calc__btn calc__btn--equals">=</button> 
-          <button class="calc__btn calc__btn--add">+</button> 
+          <button id="0" class="calc__btn calc__btn--num">0</button> 
+          <button id="period" class="calc__btn">.</button> 
+          <button id="equals" class="calc__btn calc__btn--blue calc__btn--width2x">=</button> 
         </div>
 
       </div>
     </div> 
     <div class="footer">
-      © 2021 Angelo Fallaria    
+      © 2021 <a href="https://angelo.is-a.dev">Angelo Fallaria</a> |
+      <a href="https://github.com/angelofallars/etch-a-sketch"><i class="fab fa-github"></i></a>
     </div>
   </div> 
 </body>
