@@ -1,0 +1,25 @@
+{
+  "name": "calculator",
+  "version": "1.0.0",
+  "description": "Calculator for The Odin Project.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/angelofallars/top-calculator.git"
+  },
+  "keywords": [
+    "calculator"
+  ],
+  "author": "Angelo Fallaria",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/angelofallars/top-calculator/issues"
+  },
+  "homepage": "https://github.com/angelofallars/top-calculator#readme",
+  "devDependencies": {
+    "typescript": "^4.5.2"
+  }
+}

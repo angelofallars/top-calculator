@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;700&display=swap');
+
+/* Tomorrow Night by Chris Kempson (http://chriskempson.com) */
+:root {
+  --base1:   #1d1f21;
+  --base2:   #282a2e;
+  --base3:   #373b41;
+  --base5:   #969896;
+  --base6:   #b4b7b4;
+  --base7:   #c5c8c6;
+  --base8:   #e0e0e0;
+  --base9:   #ffffff;
+  --red:     #cc6666;
+  --orange:  #de935f;
+  --yellow:  #f0c674;
+  --green:   #b5bd68;
+  --cyan:    #8abeb7;
+  --blue:    #81a2be;
+  --magenta: #b294bb;
+  --brown:   #a3685a;
+}
+
+html, body {
+  background-color: var(--base8);
+  color: var(--base1);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 50px;
+  height: 100%;
+  width: 100%;
+  gap: 20px;
+}
+
+#calc {
+  background-color: var(--base2);
+  color: var(--base9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 20px;
+  border-radius: 16px;
+  font-size: 1.8em;
+}
+
+.calc__display {
+  background-color: var(--base3);
+  color: var(--base9);
+  width: 100%;
+  text-align: right;
+  border-radius: 5px;
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+
+.calc__buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.calc__row {
+  display: flex;
+  gap: 10px;
+}
+
+.calc__btn {
+  background-color: var(--base3);
+  color: var(--base9);
+  border: 0;
+  border-radius: 5px;
+  padding: 10px 10px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.0em;
+  width: 50px;
+}
