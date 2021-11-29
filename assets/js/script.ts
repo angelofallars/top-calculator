@@ -1,13 +1,17 @@
 const MAX_RESULT_LEN = 8;
 const MAX_INPUT_LEN = 12;
+
 const displayInput = document.querySelector(".calc__display__input") as Element;
 const displayResult = document.querySelector(".calc__display__result") as Element;
+
+const buttons = document.querySelectorAll(".calc__btn");
 const digitButtons = document.querySelectorAll(".calc__btn--num");
 const operationButtons = document.querySelectorAll(".calc__btn--op");
 const periodButton = document.querySelector("#period") as Element;
 const deleteButton = document.querySelector("#delete") as Element;
 const clearButton = document.querySelector("#clear") as Element;
 const equalsButton = document.querySelector("#equals") as Element;
+
 const operationSymbols = ["+", "-", "x", "/", "%"];
 
 let typedExpression: string = "";
@@ -258,4 +262,23 @@ equalsButton.addEventListener("click", calculateExpression);
 displayInput.addEventListener("animationend", (e) => {
   const target = e.target as HTMLElement;
   target.classList.remove("calc__display__input--pop");
+});
+
+// Responsive animations
+buttons.forEach(button => {
+  button.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const inMobileMode = window.matchMedia("(max-width: 768px)").matches;
+
+    if (inMobileMode) {
+      target.classList.add("calc__btn--tap");
+    }
+  });
+
+  button.addEventListener("animationend", (e) => {
+    const target = e.target as HTMLElement;
+    if (target.classList.contains("calc__btn--tap")) {
+      target.classList.remove("calc__btn--tap");
+    }
+  })
 });

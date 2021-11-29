@@ -3,6 +3,7 @@ const MAX_RESULT_LEN = 8;
 const MAX_INPUT_LEN = 12;
 const displayInput = document.querySelector(".calc__display__input");
 const displayResult = document.querySelector(".calc__display__result");
+const buttons = document.querySelectorAll(".calc__btn");
 const digitButtons = document.querySelectorAll(".calc__btn--num");
 const operationButtons = document.querySelectorAll(".calc__btn--op");
 const periodButton = document.querySelector("#period");
@@ -220,4 +221,20 @@ equalsButton.addEventListener("click", calculateExpression);
 displayInput.addEventListener("animationend", (e) => {
     const target = e.target;
     target.classList.remove("calc__display__input--pop");
+});
+// Responsive animations
+buttons.forEach(button => {
+    button.addEventListener("click", (e) => {
+        const target = e.target;
+        const inMobileMode = window.matchMedia("(max-width: 768px)").matches;
+        if (inMobileMode) {
+            target.classList.add("calc__btn--tap");
+        }
+    });
+    button.addEventListener("animationend", (e) => {
+        const target = e.target;
+        if (target.classList.contains("calc__btn--tap")) {
+            target.classList.remove("calc__btn--tap");
+        }
+    });
 });

@@ -144,32 +144,34 @@ html, body {
   -webkit-user-select: none;
 }
 
-.calc__btn:hover {
-  background-color: var(--base3--bright);
-}
-
-.calc__btn:active {
-  background-color: var(--base3--brighter);
-}
-
 .calc__btn--blue {
   background-color: var(--blue--dark);
-}
-
-.calc__btn--blue:hover {
-  background-color: var(--blue--dark--hov);
-}
-
-.calc__btn--blue:active {
-  background-color: var(--blue);
 }
 
 .calc__btn--red {
   background-color: var(--red);
 }
 
-.calc__btn--red:hover {
-  background-color: var(--red--bright);
+@media (min-width: 768px) {
+  .calc__btn:hover {
+    background-color: var(--base3--bright);
+  }
+
+  .calc__btn--blue:hover {
+    background-color: var(--blue--dark--hov);
+  }
+
+  .calc__btn--red:hover {
+    background-color: var(--red--bright);
+  }
+}
+
+.calc__btn:active {
+  background-color: var(--base3--brighter);
+}
+
+.calc__btn--blue:active {
+  background-color: var(--blue);
 }
 
 .calc__btn--red:active {
@@ -180,10 +182,47 @@ html, body {
   flex: 2;
 }
 
+@keyframes tap {
+  from {
+    filter: brightness(1.5);
+  }
+  to {
+    filter: brightness(1);
+  }
+}
+
+.calc__btn--tap {
+  animation-name: tap;
+  animation-duration: 0.4s;
+}
+
 a {
   color: var(--base1);
 }
 
 ::moz-selection, ::selection {
   background: var(--blue);
+}
+
+@media all and (max-width: 600px) {
+  #container {
+    margin-top: 20px;
+    gap: 20px;
+  }
+
+  #calc {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .calc__display {
+    font-size: 0.95em;
+    padding: 4px 13px;
+    height: 92px;
+  }
+
+  .calc__btn {
+    width: 73px;
+    flex-basis: 73px;
+  }
 }
