@@ -70,7 +70,8 @@ function addToExpression(char) {
     updateDisplayInput();
 }
 function appendDigit(event) {
-    addToExpression(event.target.id);
+    const target = event.target;
+    addToExpression(target.id);
 }
 function appendPeriod() {
     // Prevent overload of periods
@@ -86,7 +87,8 @@ function appendPeriod() {
 function appendOperation(event) {
     const lastChar = typedExpression.slice(-1);
     const lastLastChar = typedExpression.slice(-2, -1);
-    const operationType = event.target.id;
+    const target = event.target;
+    const operationType = target.id;
     let invalidInput = false;
     if (operationType !== "subtract") {
         // Don't put operations when there are no numbers yet

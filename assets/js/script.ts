@@ -87,8 +87,9 @@ function addToExpression(char: string) {
   updateDisplayInput();
 }
 
-function appendDigit(event: any) {
-  addToExpression(event.target.id);
+function appendDigit(event: Event) {
+  const target = event.target as HTMLElement;
+  addToExpression(target.id);
 }
 
 function appendPeriod() {
@@ -107,10 +108,11 @@ function appendPeriod() {
   updateDisplayInput();
 }
 
-function appendOperation(event: any) {
+function appendOperation(event: Event) {
   const lastChar = typedExpression.slice(-1);
   const lastLastChar = typedExpression.slice(-2, -1);
-  const operationType = event.target.id;
+  const target = event.target as HTMLElement;
+  const operationType = target.id;
   let invalidInput = false;
 
   if (operationType !== "subtract") {
@@ -248,6 +250,6 @@ clearButton.addEventListener("click", clearDisplay);
 equalsButton.addEventListener("click", calculateExpression);
 
 displayInput.addEventListener("animationend", (e) => {
-  const target = e.target as HTMLTextAreaElement;
+  const target = e.target as HTMLElement;
   target.classList.remove("calc__display__input--pop");
 });
