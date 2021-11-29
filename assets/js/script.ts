@@ -1,5 +1,5 @@
-const MAX_RESULT_LEN = 10;
-const MAX_INPUT_LEN = 14;
+const MAX_RESULT_LEN = 8;
+const MAX_INPUT_LEN = 12;
 const displayInput = document.querySelector(".calc__display__input") as Element;
 const displayResult = document.querySelector(".calc__display__result") as Element;
 const digitButtons = document.querySelectorAll(".calc__btn--num");
@@ -78,6 +78,8 @@ function operate(operator: Function, numbers: [number, number]): number {
 // Button click functions
 
 function addToExpression(char: string) {
+  displayInput.classList.remove("calc__display__input--error");
+
   if (typedExpression.length > MAX_INPUT_LEN) {
     shakeDisplayInput();
     return;
@@ -154,6 +156,8 @@ function appendOperation(event: Event) {
 }
 
 function deleteLastChar() {
+  if (typedExpression === "") return;
+
   typedExpression = typedExpression.slice(0, -1);
   updateDisplayInput();
 }
@@ -190,7 +194,9 @@ function calculateExpression() {
       if (currentNumber === "0" && operation === divide) {
         typedExpression = "";
         shakeDisplayInput();
-        updateDisplayInput("No zero division!");
+        displayInput.classList.add("calc__display__input--error");
+        updateDisplayInput("Can't divide by zero, sorry :(");
+        return;
       }
 
       // Calculate an operation right away
