@@ -5,7 +5,7 @@ const periodButton = document.querySelector("#period") as Element;
 const deleteButton = document.querySelector("#delete") as Element;
 const clearButton = document.querySelector("#clear") as Element;
 const equalsButton = document.querySelector("#equals") as Element;
-const operations = ["+", "-", "x", "/", "%"];
+const operationSymbols = ["+", "-", "x", "/", "%"];
 
 let typedExpression: string = "";
 
@@ -59,13 +59,16 @@ function appendPeriod() {
 
 function appendOperation(event: any) {
   const lastChar = typedExpression.slice(-1);
+  const lastLastChar = typedExpression.slice(-2, -1);
   const operationType = event.target.id;
 
   // Can't stack another operation after another
-  if (operations.includes(lastChar) && operationType !== "subtract") return;
+  if (operationSymbols.includes(lastChar) && operationType !== "subtract") return;
 
-  if (lastChar === "-" && operations.includes(typedExpression.slice(-2))) return;
-  
+  if (lastChar === "-" && (operationSymbols.includes(lastLastChar)
+                           || lastLastChar === "-"
+                           || operationType === "subtract")) return;
+
   switch (operationType) {
     case "add":
       typedExpression += "+";
@@ -116,7 +119,7 @@ function calculateExpression() {
     } else if (currentNumber === "" && char === "-") {
       currentNumber += char;
 
-    } else if (operations.includes(char) || i === typedExpression.length) {
+    } else if (operationSymbols.includes(char) || i === typedExpression.length) {
       // Edge case: Division by zero
       if (currentNumber === "0" && operation === divide) {
         typedExpression = "";
@@ -127,7 +130,7 @@ function calculateExpression() {
       result = operate(operation, [result, parseInt(currentNumber)]); 
       currentNumber = "";
 
-      if (operations.includes(char)) {
+      if (operationSymbols.includes(char)) {
         switch (char) {
           case "+":
             operation = add;
