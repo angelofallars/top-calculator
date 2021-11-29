@@ -135,7 +135,7 @@ function calculateExpression() {
       }
 
       // Calculate an operation right away
-      result = operate(operation, [result, parseInt(currentNumber)]); 
+      result = operate(operation, [result, Number(currentNumber)]); 
       currentNumber = "";
 
       if (operationSymbols.includes(char)) {
