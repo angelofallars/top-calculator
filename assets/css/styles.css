@@ -45,7 +45,7 @@ html, body {
   margin-top: 25px;
   height: 100%;
   width: 100%;
-  gap: 22px;
+  gap: 16px;
   font-size: 1.25em;
 }
 
@@ -198,6 +198,16 @@ html, body {
 
 a {
   color: var(--base1);
+}
+
+.footer img {
+  height: 24px;
+  position: relative;
+  top: 3px;
+}
+
+.footer .fab {
+  font-size: 1.3em;
 }
 
 ::moz-selection, ::selection {
