@@ -1,3 +1,5 @@
+const MAX_RESULT_LEN = 10;
+const MAX_INPUT_LEN = 14;
 const displayInput = document.querySelector(".calc__display__input") as Element;
 const displayResult = document.querySelector(".calc__display__result") as Element;
 const digitButtons = document.querySelectorAll(".calc__btn--num");
@@ -12,6 +14,8 @@ let typedExpression: string = "";
 
 type operation = (a: number, b: number) => number;
 
+// Updating the display
+
 function updateDisplayInput(updateString?: string) {
   displayInput.classList.remove("calc__display--gray");
   displayResult.classList.add("calc__display--gray");
@@ -25,6 +29,20 @@ function updateDisplayInput(updateString?: string) {
 
 function updateDisplayResult(updateString: string) {
   displayResult.textContent = updateString;
+}
+
+function clearDisplay() {
+  typedExpression = "";
+  updateDisplayInput();
+  updateDisplayResult("");
+}
+
+function shortenNumber(n: number): string {
+  if (String(n).length < MAX_RESULT_LEN) {
+    return String(n);
+  } else {
+    return n.toPrecision(MAX_RESULT_LEN);
+  }
 }
 
 // Arithmetic functions
@@ -55,9 +73,14 @@ function operate(operator: Function, numbers: [number, number]): number {
 
 // Button click functions
 
-function appendDigit(event: any) {
-  typedExpression += event.target.id;
+function addToExpression(char: string) {
+  if (typedExpression.length > MAX_INPUT_LEN) return;
+  typedExpression += char;
   updateDisplayInput();
+}
+
+function appendDigit(event: any) {
+  addToExpression(event.target.id);
 }
 
 function appendPeriod() {
@@ -69,7 +92,7 @@ function appendPeriod() {
     if (typedExpression[i] === ".") return;
   }
 
-  typedExpression += ".";
+  addToExpression(".");
   updateDisplayInput();
 }
 
@@ -94,34 +117,26 @@ function appendOperation(event: any) {
 
   switch (operationType) {
     case "add":
-      typedExpression += "+";
+      addToExpression("+");
       break;
     case "subtract":
-      typedExpression += "-";
+      addToExpression("-");
       break;
     case "multiply":
-      typedExpression += "x";
+      addToExpression("x");
       break;
     case "divide":
-      typedExpression += "/";
+      addToExpression("/");
       break;
     case "modulo":
-      typedExpression += "%";
+      addToExpression("%");
       break;
   }
-
-  updateDisplayInput();
 }
 
 function deleteLastChar() {
   typedExpression = typedExpression.slice(0, -1);
   updateDisplayInput();
-}
-
-function clearDisplay() {
-  typedExpression = "";
-  updateDisplayInput();
-  updateDisplayResult("");
 }
 
 function calculateExpression() {
@@ -192,8 +207,8 @@ function calculateExpression() {
   if (isNaN(result)) {
     updateDisplayResult("Error")
   } else {
-    // Display the result of the expression with updateDisplayInput()
-    updateDisplayResult(String(result));
+    // Display the result of the expression with updateDisplayResult()
+    updateDisplayResult(shortenNumber(result));
   }
 }
 

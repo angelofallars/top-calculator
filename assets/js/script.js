@@ -1,4 +1,6 @@
 "use strict";
+const MAX_RESULT_LEN = 10;
+const MAX_INPUT_LEN = 14;
 const displayInput = document.querySelector(".calc__display__input");
 const displayResult = document.querySelector(".calc__display__result");
 const digitButtons = document.querySelectorAll(".calc__btn--num");
@@ -9,6 +11,7 @@ const clearButton = document.querySelector("#clear");
 const equalsButton = document.querySelector("#equals");
 const operationSymbols = ["+", "-", "x", "/", "%"];
 let typedExpression = "";
+// Updating the display
 function updateDisplayInput(updateString) {
     displayInput.classList.remove("calc__display--gray");
     displayResult.classList.add("calc__display--gray");
@@ -21,6 +24,19 @@ function updateDisplayInput(updateString) {
 }
 function updateDisplayResult(updateString) {
     displayResult.textContent = updateString;
+}
+function clearDisplay() {
+    typedExpression = "";
+    updateDisplayInput();
+    updateDisplayResult("");
+}
+function shortenNumber(n) {
+    if (String(n).length < MAX_RESULT_LEN) {
+        return String(n);
+    }
+    else {
+        return n.toPrecision(MAX_RESULT_LEN);
+    }
 }
 // Arithmetic functions
 function add(a, b) {
@@ -42,9 +58,14 @@ function operate(operator, numbers) {
     return operator(...numbers);
 }
 // Button click functions
-function appendDigit(event) {
-    typedExpression += event.target.id;
+function addToExpression(char) {
+    if (typedExpression.length > MAX_INPUT_LEN)
+        return;
+    typedExpression += char;
     updateDisplayInput();
+}
+function appendDigit(event) {
+    addToExpression(event.target.id);
 }
 function appendPeriod() {
     // Prevent overload of periods
@@ -52,7 +73,7 @@ function appendPeriod() {
         if (typedExpression[i] === ".")
             return;
     }
-    typedExpression += ".";
+    addToExpression(".");
     updateDisplayInput();
 }
 function appendOperation(event) {
@@ -75,31 +96,25 @@ function appendOperation(event) {
         return;
     switch (operationType) {
         case "add":
-            typedExpression += "+";
+            addToExpression("+");
             break;
         case "subtract":
-            typedExpression += "-";
+            addToExpression("-");
             break;
         case "multiply":
-            typedExpression += "x";
+            addToExpression("x");
             break;
         case "divide":
-            typedExpression += "/";
+            addToExpression("/");
             break;
         case "modulo":
-            typedExpression += "%";
+            addToExpression("%");
             break;
     }
-    updateDisplayInput();
 }
 function deleteLastChar() {
     typedExpression = typedExpression.slice(0, -1);
     updateDisplayInput();
-}
-function clearDisplay() {
-    typedExpression = "";
-    updateDisplayInput();
-    updateDisplayResult("");
 }
 function calculateExpression() {
     let currentNumber = "";
@@ -163,8 +178,8 @@ function calculateExpression() {
         updateDisplayResult("Error");
     }
     else {
-        // Display the result of the expression with updateDisplayInput()
-        updateDisplayResult(String(result));
+        // Display the result of the expression with updateDisplayResult()
+        updateDisplayResult(shortenNumber(result));
     }
 }
 digitButtons.forEach((digit) => {
