@@ -271,9 +271,12 @@ buttons.forEach(button => {
     const inMobileMode = window.matchMedia("(max-width: 768px)").matches;
 
     if (inMobileMode) {
+      if (target.classList.contains("calc__btn--tap")) {
+        target.style.animation = "none";
+        setTimeout(() => target.style.animation = "", 1);
+      }
+
       target.classList.add("calc__btn--tap");
-      target.style.animation = "none";
-      setTimeout(() => target.style.animation = "", 1);
     }
   });
 
