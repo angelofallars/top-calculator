@@ -6,6 +6,7 @@ const periodButton = document.querySelector("#period");
 const deleteButton = document.querySelector("#delete");
 const clearButton = document.querySelector("#clear");
 const equalsButton = document.querySelector("#equals");
+const operations = ["+", "-", "x", "/", "%"];
 let typedExpression = "";
 function updateDisplay(updateString) {
     if (updateString) {
@@ -72,39 +73,49 @@ function clearDisplay() {
     updateDisplay();
 }
 function calculateExpression() {
-    let expressions = [];
     let currentNumber = "";
+    let operation = add;
+    let result = 0;
     // Split the typed expression into an array
-    for (let i = 0; i < typedExpression.length; i++) {
+    for (let i = 0; i < typedExpression.length + 1; i++) {
         const char = typedExpression[i];
-        // Digit
-        if (!isNaN(parseInt(char))) {
+        if (!isNaN(parseInt(char)) || char === ".") {
             currentNumber += char;
-            // Period
         }
-        else if (char === ".") {
-            currentNumber += ".";
-            // Operation (+ - x / %)
-        }
-        else {
-            expressions.push(parseInt(currentNumber));
-            expressions.push(char);
+        else if (operations.includes(char) || i === typedExpression.length) {
+            // Calculate an operation right away
+            result = operate(operation, [result, parseInt(currentNumber)]);
             currentNumber = "";
-        }
-        // Push the last number into the array
-        if (i === typedExpression.length - 1) {
-            expressions.push(parseInt(currentNumber));
+            if (operations.includes(char)) {
+                switch (char) {
+                    case "+":
+                        operation = add;
+                        break;
+                    case "-":
+                        operation = subtract;
+                        break;
+                    case "x":
+                        operation = multiply;
+                        break;
+                    case "/":
+                        operation = divide;
+                        break;
+                    case "%":
+                        operation = modulo;
+                        break;
+                }
+            }
         }
     }
-    // Iterate through the array with .reduce
-    const result = expressions.reduce((final, current, index, array) => {
-        // Operators
-        if (current === "+") {
-            final = operate(add, [result, array[index + 1]]);
-        }
-        return final;
-    });
-    // Display the result of the expression with updateDisplay()
+    // Clear the user input
+    typedExpression = "";
+    if (isNaN(result)) {
+        updateDisplay("Error");
+    }
+    else {
+        // Display the result of the expression with updateDisplay()
+        updateDisplay(String(result));
+    }
 }
 digitButtons.forEach((digit) => {
     digit.addEventListener("click", appendDigit);
