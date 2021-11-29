@@ -70,11 +70,15 @@ function appendOperation(event: any) {
   const lastLastChar = typedExpression.slice(-2, -1);
   const operationType = event.target.id;
 
-  if (!typedExpression) return;
+  if (operationType !== "subtract") {
+    // Don't put operations when there are no numbers yet
+    if (!typedExpression) return;
 
-  // Can't stack another operation after another
-  if (operationSymbols.includes(lastChar) && operationType !== "subtract") return;
+    // Can't stack another operation after another
+    if (operationSymbols.includes(lastChar)) return;
+  }
 
+  // Safety checks around + and - operators
   if ((lastChar === "+" || lastChar === "-") && 
       (operationSymbols.includes(lastLastChar)
        || lastLastChar === "-"
