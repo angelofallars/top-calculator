@@ -76,6 +76,9 @@ function calculateExpression() {
     let currentNumber = "";
     let operation = add;
     let result = 0;
+    // If the user didn't type anything, don't do anything
+    if (!typedExpression)
+        return;
     // Split the typed expression into an array
     for (let i = 0; i < typedExpression.length + 1; i++) {
         const char = typedExpression[i];
