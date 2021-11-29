@@ -101,6 +101,10 @@ function calculateExpression() {
     if (!isNaN(parseInt(char)) || char === ".") {
       currentNumber += char;
 
+    // Detect negative numbers that start with -
+    } else if (currentNumber === "" && char === "-") {
+      currentNumber += char;
+
     } else if (operations.includes(char) || i === typedExpression.length) {
       // Edge case: Division by zero
       if (currentNumber === "0" && operation === divide) {
