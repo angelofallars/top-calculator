@@ -161,6 +161,9 @@ function calculateExpression() {
     }
   }
 
+  // If the evaluated result didn't do anything (same as input), return
+  if (String(result) === typedExpression) return;
+
   // Clear the user input
   typedExpression = "";
 
