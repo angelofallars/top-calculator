@@ -78,16 +78,16 @@ function appendOperation(event: any) {
       break;
     case "subtract":
       typedExpression += "-";
-      break
+      break;
     case "multiply":
       typedExpression += "x";
-      break
+      break;
     case "divide":
       typedExpression += "/";
-      break
+      break;
     case "modulo":
       typedExpression += "%";
-      break
+      break;
   }
 
   updateDisplay();
