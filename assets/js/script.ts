@@ -62,12 +62,15 @@ function appendOperation(event: any) {
   const lastLastChar = typedExpression.slice(-2, -1);
   const operationType = event.target.id;
 
+  if (!typedExpression) return;
+
   // Can't stack another operation after another
   if (operationSymbols.includes(lastChar) && operationType !== "subtract") return;
 
-  if (lastChar === "-" && (operationSymbols.includes(lastLastChar)
-                           || lastLastChar === "-"
-                           || operationType === "subtract")) return;
+  if ((lastChar === "+" || lastChar === "-") && 
+      (operationSymbols.includes(lastLastChar)
+       || lastLastChar === "-"
+       || operationType === "subtract")) return;
 
   switch (operationType) {
     case "add":
