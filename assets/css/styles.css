@@ -130,7 +130,7 @@ html, body {
   background-color: var(--red--bright);
 }
 
-.calc__btn--red:hover {
+.calc__btn--red:active {
   background-color: var(--red--brighter);
 }
 
