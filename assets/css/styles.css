@@ -224,6 +224,7 @@ a {
   .calc__btn {
     width: 73px;
     flex-basis: 73px;
+    transition: background-color 4s;
   }
 
   .calc__btn:active {

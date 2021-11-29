@@ -224,17 +224,13 @@ displayInput.addEventListener("animationend", (e) => {
 });
 // Responsive animations
 buttons.forEach(button => {
-    button.addEventListener("mouseenter", (e) => {
-        const target = e.target;
-        target.classList.remove("calc__btn--tap");
-    });
-    button.addEventListener("mouseup", (e) => {
+    button.addEventListener("click", (e) => {
         const target = e.target;
         const inMobileMode = window.matchMedia("(max-width: 768px)").matches;
         if (inMobileMode) {
-            target.style.animation = "none";
-            setTimeout(() => target.style.animation = "", 10);
             target.classList.add("calc__btn--tap");
+            target.style.animation = "none";
+            setTimeout(() => target.style.animation = "", 1);
         }
     });
     button.addEventListener("animationend", (e) => {
