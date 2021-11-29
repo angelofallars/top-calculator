@@ -142,14 +142,17 @@ html, body {
   user-select: none;
   -moz-user-select: none;
   -webkit-user-select: none;
+  --active-color: var(--base3--brighter);
 }
 
 .calc__btn--blue {
   background-color: var(--blue--dark);
+  --active-color: var(--blue);
 }
 
 .calc__btn--red {
   background-color: var(--red);
+  --active-color: var(--red--bright);
 }
 
 @media (min-width: 768px) {
@@ -167,14 +170,17 @@ html, body {
   
   .calc__btn:active {
     background-color: var(--base3--brighter);
+    filter: brightness(1.25);
   }
 
   .calc__btn--blue:active {
     background-color: var(--blue);
+    filter: brightness(1.25);
   }
 
   .calc__btn--red:active {
     background-color: var(--red--brighter);
+    filter: brightness(1.25);
   }
 }
 
@@ -184,16 +190,18 @@ html, body {
 
 @keyframes tap {
   from {
-    filter: brightness(1.6);
-  }
-  to {
-    filter: brightness(1);
+    background-color: var(--active-color);
+    filter: brightness(1.25);
   }
 }
 
 .calc__btn--tap {
   animation-name: tap;
-  animation-duration: 0.5s;
+  animation-duration: 0.45s;
+}
+
+.calc__btn i {
+  pointer-events: none;
 }
 
 a {

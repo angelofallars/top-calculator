@@ -222,18 +222,15 @@ displayInput.addEventListener("animationend", (e) => {
     const target = e.target;
     target.classList.remove("calc__display__input--pop");
 });
-// Responsive animations
+// Nice button fade-out animations after clicking
 buttons.forEach(button => {
     button.addEventListener("click", (e) => {
         const target = e.target;
-        const inMobileMode = window.matchMedia("(max-width: 768px)").matches;
-        if (inMobileMode) {
-            if (target.classList.contains("calc__btn--tap")) {
-                target.style.animation = "none";
-                setTimeout(() => target.style.animation = "", 1);
-            }
-            target.classList.add("calc__btn--tap");
+        if (target.classList.contains("calc__btn--tap")) {
+            target.style.animation = "none";
+            setTimeout(() => target.style.animation = "", 1);
         }
+        target.classList.add("calc__btn--tap");
     });
     button.addEventListener("animationend", (e) => {
         const target = e.target;
