@@ -1,4 +1,5 @@
-const display = document.querySelector(".calc__display") as Element;
+const displayInput = document.querySelector(".calc__display__input") as Element;
+const displayResult = document.querySelector(".calc__display__result") as Element;
 const digitButtons = document.querySelectorAll(".calc__btn--num");
 const operationButtons = document.querySelectorAll(".calc__btn--op");
 const periodButton = document.querySelector("#period") as Element;
@@ -11,12 +12,19 @@ let typedExpression: string = "";
 
 type operation = (a: number, b: number) => number;
 
-function updateDisplay(updateString?: string) {
+function updateDisplayInput(updateString?: string) {
+  displayInput.classList.remove("calc__display--gray");
+  displayResult.classList.add("calc__display--gray");
+
   if (updateString) {
-    display.textContent = updateString;
+    displayInput.textContent = updateString;
   } else {
-    display.textContent = String(typedExpression);
+    displayInput.textContent = String(typedExpression);
   }
+}
+
+function updateDisplayResult(updateString: string) {
+  displayResult.textContent = updateString;
 }
 
 // Arithmetic functions
@@ -49,7 +57,7 @@ function operate(operator: Function, numbers: [number, number]): number {
 
 function appendDigit(event: any) {
   typedExpression += event.target.id;
-  updateDisplay();
+  updateDisplayInput();
 }
 
 function appendPeriod() {
@@ -62,7 +70,7 @@ function appendPeriod() {
   }
 
   typedExpression += ".";
-  updateDisplay();
+  updateDisplayInput();
 }
 
 function appendOperation(event: any) {
@@ -102,17 +110,18 @@ function appendOperation(event: any) {
       break;
   }
 
-  updateDisplay();
+  updateDisplayInput();
 }
 
 function deleteLastChar() {
   typedExpression = typedExpression.slice(0, -1);
-  updateDisplay();
+  updateDisplayInput();
 }
 
 function clearDisplay() {
   typedExpression = "";
-  updateDisplay();
+  updateDisplayInput();
+  updateDisplayResult("");
 }
 
 function calculateExpression() {
@@ -143,7 +152,7 @@ function calculateExpression() {
       // Edge case: Division by zero
       if (currentNumber === "0" && operation === divide) {
         typedExpression = "";
-        return updateDisplay("No zero division!");
+        return updateDisplayInput("No zero division!");
       }
 
       // Calculate an operation right away
@@ -177,12 +186,14 @@ function calculateExpression() {
 
   // Clear the user input
   typedExpression = "";
+  displayInput.classList.add("calc__display--gray");
+  displayResult.classList.remove("calc__display--gray");
 
   if (isNaN(result)) {
-    updateDisplay("Error")
+    updateDisplayResult("Error")
   } else {
-    // Display the result of the expression with updateDisplay()
-    updateDisplay(String(result));
+    // Display the result of the expression with updateDisplayInput()
+    updateDisplayResult(String(result));
   }
 }
 

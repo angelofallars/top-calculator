@@ -21,6 +21,7 @@
 
   --base3--bright:   #494C52;
   --base3--brighter: #5B5F66;
+  --base4--dark:     #8A8C8A;
   --blue--dark:      #708DA6;
   --blue--dark--hov: #7998B2;
   --red--bright:     #DD6E6E;
@@ -64,14 +65,25 @@ html, body {
   background-color: var(--base7);
   color: var(--base2);
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 5px;
   width: 100%;
-  height: 50px;
   text-align: right;
+  height: 67px;
   border-radius: var(--btn-border-radius);
   box-sizing: border-box;
-  padding: 0 10px;
+  padding: 5px 10px;
+}
+
+.calc__display__input, .calc__display__result {
+  height: 25px;
+}
+
+.calc__display--gray {
+  color: var(--base4--dark);
+  transition: color 0.20s ease-out;
 }
 
 .calc__buttons {

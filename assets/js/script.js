@@ -1,5 +1,6 @@
 "use strict";
-const display = document.querySelector(".calc__display");
+const displayInput = document.querySelector(".calc__display__input");
+const displayResult = document.querySelector(".calc__display__result");
 const digitButtons = document.querySelectorAll(".calc__btn--num");
 const operationButtons = document.querySelectorAll(".calc__btn--op");
 const periodButton = document.querySelector("#period");
@@ -8,13 +9,18 @@ const clearButton = document.querySelector("#clear");
 const equalsButton = document.querySelector("#equals");
 const operationSymbols = ["+", "-", "x", "/", "%"];
 let typedExpression = "";
-function updateDisplay(updateString) {
+function updateDisplayInput(updateString) {
+    displayInput.classList.remove("calc__display--gray");
+    displayResult.classList.add("calc__display--gray");
     if (updateString) {
-        display.textContent = updateString;
+        displayInput.textContent = updateString;
     }
     else {
-        display.textContent = String(typedExpression);
+        displayInput.textContent = String(typedExpression);
     }
+}
+function updateDisplayResult(updateString) {
+    displayResult.textContent = updateString;
 }
 // Arithmetic functions
 function add(a, b) {
@@ -38,7 +44,7 @@ function operate(operator, numbers) {
 // Button click functions
 function appendDigit(event) {
     typedExpression += event.target.id;
-    updateDisplay();
+    updateDisplayInput();
 }
 function appendPeriod() {
     // Prevent overload of periods
@@ -47,7 +53,7 @@ function appendPeriod() {
             return;
     }
     typedExpression += ".";
-    updateDisplay();
+    updateDisplayInput();
 }
 function appendOperation(event) {
     const lastChar = typedExpression.slice(-1);
@@ -84,15 +90,16 @@ function appendOperation(event) {
             typedExpression += "%";
             break;
     }
-    updateDisplay();
+    updateDisplayInput();
 }
 function deleteLastChar() {
     typedExpression = typedExpression.slice(0, -1);
-    updateDisplay();
+    updateDisplayInput();
 }
 function clearDisplay() {
     typedExpression = "";
-    updateDisplay();
+    updateDisplayInput();
+    updateDisplayResult("");
 }
 function calculateExpression() {
     let currentNumber = "";
@@ -119,7 +126,7 @@ function calculateExpression() {
             // Edge case: Division by zero
             if (currentNumber === "0" && operation === divide) {
                 typedExpression = "";
-                return updateDisplay("No zero division!");
+                return updateDisplayInput("No zero division!");
             }
             // Calculate an operation right away
             result = operate(operation, [result, Number(currentNumber)]);
@@ -150,12 +157,14 @@ function calculateExpression() {
         return;
     // Clear the user input
     typedExpression = "";
+    displayInput.classList.add("calc__display--gray");
+    displayResult.classList.remove("calc__display--gray");
     if (isNaN(result)) {
-        updateDisplay("Error");
+        updateDisplayResult("Error");
     }
     else {
-        // Display the result of the expression with updateDisplay()
-        updateDisplay(String(result));
+        // Display the result of the expression with updateDisplayInput()
+        updateDisplayResult(String(result));
     }
 }
 digitButtons.forEach((digit) => {
