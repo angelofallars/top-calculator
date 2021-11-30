@@ -189,7 +189,7 @@ function calculateExpression() {
         }
     }
     // If the evaluated result didn't do anything (same as input), return
-    if (String(result) === typedExpression) {
+    if (String(result) === String(parseFloat(typedExpression))) {
         shakeDisplayInput();
         return;
     }
