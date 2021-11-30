@@ -232,7 +232,7 @@ function calculateExpression() {
   }
 
   // If the evaluated result didn't do anything (same as input), return
-  if (String(result) === String(parseFloat(typedExpression))) {
+  if (String(result) === String(Number(typedExpression))) {
     shakeDisplayInput();
     return;
   }
