@@ -200,6 +200,11 @@ html, body {
   animation-duration: 0.45s;
 }
 
+/* Used in the TypeScript code to reset animations */
+.calc__btn--reset {
+  animation: none;
+}
+
 .calc__btn i {
   pointer-events: none;
 }

@@ -245,6 +245,17 @@ function calculateExpression() {
   }
 }
 
+// Visual functions
+
+function fadeOutButtonTap(button: Element) {
+    if (button.classList.contains("calc__btn--tap")) {
+      button.classList.add("calc__btn--reset");
+      setTimeout(() => button.classList.remove("calc__btn--reset"), 1);
+    }
+
+    button.classList.add("calc__btn--tap");
+}
+
 digitButtons.forEach((digit) => {
   digit.addEventListener("click", () => appendDigit(digit.id));
 });
@@ -263,16 +274,7 @@ displayInput.addEventListener("animationend", (e) => {
 
 // Nice button fade-out animations after clicking
 buttons.forEach(button => {
-  button.addEventListener("click", (e) => {
-    const target = e.target as HTMLElement;
-
-    if (target.classList.contains("calc__btn--tap")) {
-      target.style.animation = "none";
-      setTimeout(() => target.style.animation = "", 1);
-    }
-
-    target.classList.add("calc__btn--tap");
-  });
+  button.addEventListener("click", () => fadeOutButtonTap(button));
 
   button.addEventListener("animationend", (e) => {
     const target = e.target as HTMLElement;
