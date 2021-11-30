@@ -325,17 +325,17 @@ window.addEventListener("keydown", (e) => {
     appendOperation(operationButton.id);
     fadeOutButtonTap(operationButton);
 
-  } else if (keyCode === "-") {
+  } else if (keyCode === "-" || keyCode === "_") {
     const operationButton = document.querySelector("#subtract") as Element;
     appendOperation(operationButton.id);
     fadeOutButtonTap(operationButton);
 
-  } else if (keyCode === "x" || keyCode === "*") {
+  } else if (keyCode === "x" || keyCode === "X" || keyCode === "*") {
     const operationButton = document.querySelector("#multiply") as Element;
     appendOperation(operationButton.id);
     fadeOutButtonTap(operationButton);
 
-  } else if (keyCode === "/") {
+  } else if (keyCode === "/" || keyCode === "?") {
     const operationButton = document.querySelector("#divide") as Element;
     appendOperation(operationButton.id);
     fadeOutButtonTap(operationButton);
