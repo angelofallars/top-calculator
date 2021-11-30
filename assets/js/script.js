@@ -237,3 +237,60 @@ buttons.forEach(button => {
         }
     });
 });
+// Keyboard-driven calculator
+window.addEventListener("keydown", (e) => {
+    const keyCode = e.key;
+    // Digits (0-9)
+    if (!isNaN(parseInt(keyCode))) {
+        const digitButton = document.getElementById(keyCode);
+        appendDigit(keyCode);
+        fadeOutButtonTap(digitButton);
+        // Decimal sign (.)
+    }
+    else if (keyCode === ".") {
+        appendPeriod();
+        fadeOutButtonTap(periodButton);
+        // Equals (= or enter)
+    }
+    else if (keyCode === "=" || keyCode === "Enter") {
+        calculateExpression();
+        fadeOutButtonTap(equalsButton);
+        // Backspace or clear screen
+    }
+    else if (keyCode === "Backspace") {
+        if (typedExpression !== "") {
+            deleteLastChar();
+            fadeOutButtonTap(deleteButton);
+        }
+        else {
+            clearDisplay();
+            fadeOutButtonTap(clearButton);
+        }
+        // Operations buttons
+    }
+    else if (keyCode === "+") {
+        const operationButton = document.querySelector("#add");
+        appendOperation(operationButton.id);
+        fadeOutButtonTap(operationButton);
+    }
+    else if (keyCode === "-") {
+        const operationButton = document.querySelector("#subtract");
+        appendOperation(operationButton.id);
+        fadeOutButtonTap(operationButton);
+    }
+    else if (keyCode === "x" || keyCode === "*") {
+        const operationButton = document.querySelector("#multiply");
+        appendOperation(operationButton.id);
+        fadeOutButtonTap(operationButton);
+    }
+    else if (keyCode === "/") {
+        const operationButton = document.querySelector("#divide");
+        appendOperation(operationButton.id);
+        fadeOutButtonTap(operationButton);
+    }
+    else if (keyCode === "%") {
+        const operationButton = document.querySelector("#modulo");
+        appendOperation(operationButton.id);
+        fadeOutButtonTap(operationButton);
+    }
+});
