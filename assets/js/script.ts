@@ -42,7 +42,21 @@ function clearDisplay() {
 }
 
 function shakeDisplayInput() {
+  if (displayInput.classList.contains("calc__display__input--pop")) {
+    displayInput.classList.add("calc__display__input--reset");
+    setTimeout(() => displayInput.classList.remove("calc__display__input--reset"), 1);
+  }
+
   displayInput.classList.add("calc__display__input--pop");
+}
+
+function fadeOutButtonTap(button: Element) {
+    if (button.classList.contains("calc__btn--tap")) {
+      button.classList.add("calc__btn--reset");
+      setTimeout(() => button.classList.remove("calc__btn--reset"), 1);
+    }
+
+    button.classList.add("calc__btn--tap");
 }
 
 function shortenNumber(n: number): string {

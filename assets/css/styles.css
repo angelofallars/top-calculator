@@ -105,6 +105,11 @@ html, body {
   animation-duration: 0.25s;
 }
 
+/* Used in the TypeScript code to reset animations */
+.calc__display__input--reset {
+  animation: none;
+}
+
 .calc__display__input--error {
   color: var(--red);
   font-family: 'Roboto', sans-serif;
