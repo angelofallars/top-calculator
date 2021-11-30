@@ -12,7 +12,7 @@ Calculator project for [The Odin Project](https://www.theodinproject.com/). Uses
 - ( . ) - Degree symbol
 - ( + / = ) - Addition
 - ( - ) - Subtraction
-- (x / \*) - Multiplication
+- ( x / \* ) - Multiplication
 - ( / ) - Division
 - ( % ) - Modulo (Remainder)
 - ( Enter ) - Calculate
