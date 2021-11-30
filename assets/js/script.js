@@ -38,13 +38,6 @@ function shakeDisplayInput() {
     }
     displayInput.classList.add("calc__display__input--pop");
 }
-function fadeOutButtonTap(button) {
-    if (button.classList.contains("calc__btn--tap")) {
-        button.classList.add("calc__btn--reset");
-        setTimeout(() => button.classList.remove("calc__btn--reset"), 1);
-    }
-    button.classList.add("calc__btn--tap");
-}
 function shortenNumber(n) {
     if (String(n).length < MAX_RESULT_LEN) {
         return String(n);
