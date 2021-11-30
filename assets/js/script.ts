@@ -318,6 +318,9 @@ window.addEventListener("keydown", (e) => {
       clearDisplay();
       fadeOutButtonTap(clearButton);
     }
+  } else if (keyCode === "Escape"){
+    clearDisplay();
+    fadeOutButtonTap(clearButton);
 
   // Operations buttons
   } else if (keyCode === "+" || keyCode === "=") {

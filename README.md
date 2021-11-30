@@ -17,3 +17,4 @@ Calculator project for [The Odin Project](https://www.theodinproject.com/). Uses
 - ( % ) - Modulo (Remainder)
 - ( Enter ) - Calculate
 - ( Backspace ) - Delete/Clear
+- ( Escape ) - Clear everything
