@@ -250,9 +250,9 @@ window.addEventListener("keydown", (e) => {
     else if (keyCode === ".") {
         appendPeriod();
         fadeOutButtonTap(periodButton);
-        // Equals (= or enter)
+        // Equals (enter)
     }
-    else if (keyCode === "=" || keyCode === "Enter") {
+    else if (keyCode === "Enter") {
         calculateExpression();
         fadeOutButtonTap(equalsButton);
         // Backspace or clear screen
@@ -268,7 +268,7 @@ window.addEventListener("keydown", (e) => {
         }
         // Operations buttons
     }
-    else if (keyCode === "+") {
+    else if (keyCode === "+" || keyCode === "=") {
         const operationButton = document.querySelector("#add");
         appendOperation(operationButton.id);
         fadeOutButtonTap(operationButton);

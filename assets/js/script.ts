@@ -299,8 +299,8 @@ window.addEventListener("keydown", (e) => {
     appendPeriod();
     fadeOutButtonTap(periodButton);
 
-  // Equals (= or enter)
-  } else if (keyCode === "=" || keyCode === "Enter") {
+  // Equals (enter)
+  } else if (keyCode === "Enter") {
     calculateExpression();
     fadeOutButtonTap(equalsButton);
 
@@ -315,7 +315,7 @@ window.addEventListener("keydown", (e) => {
     }
 
   // Operations buttons
-  } else if (keyCode === "+") {
+  } else if (keyCode === "+" || keyCode === "=") {
     const operationButton = document.querySelector("#add") as Element;
     appendOperation(operationButton.id);
     fadeOutButtonTap(operationButton);
