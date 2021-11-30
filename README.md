@@ -1,6 +1,6 @@
 # [Calculator](https://angelo.is-a.dev/top-calculator/) - The Odin Project
 
-Calculator project for [The Odin Project](https://www.theodinproject.com/). Uses the Tokyo Night theme.<br> My first **Typescript** project.
+Calculator project for [The Odin Project](https://www.theodinproject.com/). Uses the Tomorrow Night theme.<br> My first **Typescript** project.
 
 ![image](https://user-images.githubusercontent.com/39676098/143856650-9b0d0259-e777-4c29-b64c-711eaecfc0ec.png)
 
