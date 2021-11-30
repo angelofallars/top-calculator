@@ -71,9 +71,8 @@ function addToExpression(char) {
     typedExpression += char;
     updateDisplayInput();
 }
-function appendDigit(event) {
-    const target = event.target;
-    addToExpression(target.id);
+function appendDigit(digit) {
+    addToExpression(digit);
 }
 function appendPeriod() {
     // Prevent overload of periods
@@ -86,11 +85,9 @@ function appendPeriod() {
     addToExpression(".");
     updateDisplayInput();
 }
-function appendOperation(event) {
+function appendOperation(operationType) {
     const lastChar = typedExpression.slice(-1);
     const lastLastChar = typedExpression.slice(-2, -1);
-    const target = event.target;
-    const operationType = target.id;
     let invalidInput = false;
     if (operationType !== "subtract") {
         // Don't put operations when there are no numbers yet
@@ -209,10 +206,10 @@ function calculateExpression() {
     }
 }
 digitButtons.forEach((digit) => {
-    digit.addEventListener("click", appendDigit);
+    digit.addEventListener("click", () => appendDigit(digit.id));
 });
 operationButtons.forEach((operation) => {
-    operation.addEventListener("click", appendOperation);
+    operation.addEventListener("click", () => appendOperation(operation.id));
 });
 periodButton.addEventListener("click", appendPeriod);
 deleteButton.addEventListener("click", deleteLastChar);
