@@ -61,6 +61,7 @@ html, body {
   border-radius: 27px;
   font-size: 1.9em;
   font-family: 'Roboto Mono', sans-serif;
+  touch-action: manipulation;
 }
 
 .calc__display {
