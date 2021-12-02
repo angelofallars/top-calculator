@@ -235,13 +235,12 @@ a {
 
 @media all and (max-width: 600px) {
   #container {
-    margin-top: 20px;
+    margin-top: 8px;
     gap: 20px;
   }
 
   #calc {
-    padding-left: 18px;
-    padding-right: 18px;
+    padding: 30px 20px;
   }
 
   .calc__display {
@@ -251,9 +250,9 @@ a {
   }
 
   .calc__btn {
-    width: 73px;
-    flex-basis: 73px;
-    transition: background-color 4s;
+    width: 70px;
+    height: 55px;
+    flex-basis: 70px;
   }
 
   .calc__btn:active {
